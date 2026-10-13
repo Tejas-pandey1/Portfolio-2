@@ -1,6 +1,9 @@
+'use client'
+
 import { AppWindow, Bot, Gamepad2, Globe, MonitorSmartphone, type LucideIcon } from 'lucide-react'
 import { SectionHeading } from './section-heading'
 import { cn } from '@/lib/utils'
+import { useEditable } from '@/lib/editor/use-editable'
 
 type Service = {
   icon: LucideIcon
@@ -11,61 +14,55 @@ type Service = {
   className?: string
 }
 
-const services: Service[] = [
-  {
-    icon: AppWindow,
-    title: 'Apps',
-    description: 'Web and mobile apps with clean architecture, real-time data, and interfaces that feel effortless.',
-    tags: ['React Native', 'Next.js', 'Supabase'],
-    color: 'bg-sun',
-    className: 'md:col-span-2',
-  },
-  {
-    icon: Bot,
-    title: 'AI integrations',
-    description: 'Chatbots, copilots, and smart automations that plug LLMs into your product the right way.',
-    tags: ['LLMs', 'RAG', 'Agents'],
-    color: 'bg-mint',
-  },
-  {
-    icon: Globe,
-    title: 'Websites',
-    description: 'Fast, SEO-friendly marketing sites and landing pages that turn visitors into customers.',
-    tags: ['SEO', 'CMS', 'Analytics'],
-    color: 'bg-sky',
-  },
-  {
-    icon: MonitorSmartphone,
-    title: 'Responsive design',
-    description: 'Pixel-tight layouts that look and work beautifully on every screen, from watch to widescreen.',
-    tags: ['Mobile-first', 'A11y', 'Performance'],
-    color: 'bg-card',
-  },
-  {
-    icon: Gamepad2,
-    title: 'Games',
-    description: 'Browser and mobile games with juicy game feel, tight controls, and a whole lot of fun.',
-    tags: ['Phaser', 'Unity', 'Three.js'],
-    color: 'bg-coral',
-  },
+const iconMap: Record<string, LucideIcon> = {
+  Apps: AppWindow,
+  'AI integrations': Bot,
+  Websites: Globe,
+  'Responsive design': MonitorSmartphone,
+  Games: Gamepad2,
+}
+
+const baselineServices: Omit<Service, 'title' | 'description' | 'tags'>[] = [
+  { icon: AppWindow, color: 'bg-sun', className: 'md:col-span-2' },
+  { icon: Bot, color: 'bg-mint' },
+  { icon: Globe, color: 'bg-sky' },
+  { icon: MonitorSmartphone, color: 'bg-card' },
+  { icon: Gamepad2, color: 'bg-coral' },
 ]
 
 export function Services() {
+  const eyebrow = useEditable('services.eyebrow')
+  const title = useEditable('services.title')
+  const description = useEditable('services.description')
+  const cards = [0, 1, 2, 3, 4].map((i) => useEditable(`services.card-${i}`))
+
+  const services: Service[] = cards.map((card, i) => {
+    const cardTitle = card.get('title') as string
+    const Icon = iconMap[cardTitle] ?? baselineServices[i].icon
+    return {
+      icon: Icon,
+      title: cardTitle,
+      description: card.get('description') as string,
+      tags: (card.get('tags') as string).split(',').map((t) => t.trim()).filter(Boolean),
+      color: baselineServices[i].color,
+      className: baselineServices[i].className,
+    }
+  })
+
   return (
     <section id="services" aria-labelledby="services-title" className="mx-auto max-w-6xl px-4 py-24 md:py-32">
       <SectionHeading
         id="services-title"
-        eyebrow="What I do"
-        title={
-          <>
-            One dev. <span className="text-grape">Five superpowers.</span>
-          </>
-        }
-        description="Whether you need a product, a smart feature, or something just for fun — I design, build, and ship it end to end."
+        eyebrow={eyebrow.get('text') as string}
+        title={title.get('text')}
+        description={description.get('text') as string}
+        eyebrowEditor={eyebrow.editorProps}
+        titleEditor={title.editorProps}
+        descriptionEditor={description.editorProps}
       />
 
       <ul className="mt-14 grid gap-6 md:grid-cols-3">
-        {services.map((service) => (
+        {services.map((service, i) => (
           <li
             key={service.title}
             className={cn(
@@ -73,6 +70,7 @@ export function Services() {
               service.color,
               service.className,
             )}
+            {...cards[i].editorProps}
           >
             <div className="flex items-center justify-between">
               <span className="flex size-14 items-center justify-center rounded-2xl border-2 bg-card transition-transform group-hover:rotate-12">

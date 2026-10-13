@@ -1,24 +1,17 @@
-const skills = [
-  'React',
-  'Next.js',
-  'TypeScript',
-  'React Native',
-  'OpenAI & LLMs',
-  'Node.js',
-  'Tailwind CSS',
-  'Unity',
-  'Phaser',
-  'Three.js',
-  'PostgreSQL',
-  'Figma',
-]
+'use client'
+
+import { useEditable } from '@/lib/editor/use-editable'
 
 const dotColors = ['bg-coral', 'bg-sun', 'bg-mint', 'bg-sky']
 
 export function SkillMarquee() {
+  const skillsEditor = useEditable('skills.text')
+  const skillsText = skillsEditor.get('text') as string
+  const skills = skillsText.split(',').map((s) => s.trim()).filter(Boolean)
+
   return (
     <section aria-label="Tools and technologies" className="-rotate-1 border-y-2 bg-grape py-4 text-primary-foreground">
-      <div className="flex overflow-hidden">
+      <div className="flex overflow-hidden" {...skillsEditor.editorProps}>
         <ul className="flex shrink-0 animate-marquee items-center gap-8 pr-8">
           {[...skills, ...skills].map((skill, i) => (
             <li

@@ -2,6 +2,7 @@ import { Analytics } from '@vercel/analytics/next'
 import type { Metadata, Viewport } from 'next'
 import { Geist, Bricolage_Grotesque } from 'next/font/google'
 import './globals.css'
+import { EditorProvider } from '@/lib/editor/editor-context'
 
 const geistSans = Geist({ subsets: ['latin'], variable: '--font-geist-sans' })
 const bricolage = Bricolage_Grotesque({ subsets: ['latin'], variable: '--font-bricolage' })
@@ -34,7 +35,9 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${geistSans.variable} ${bricolage.variable}`}>
       <body className="antialiased">
-        {children}
+        <EditorProvider>
+          {children}
+        </EditorProvider>
         {process.env.NODE_ENV === 'production' && <Analytics />}
       </body>
     </html>

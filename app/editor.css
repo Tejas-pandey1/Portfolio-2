@@ -1,0 +1,361 @@
+/* Editor-only styles — scoped to .ve-editor-mode, does not affect normal website */
+
+.ve-editor-mode {
+  /* Shift page content to make room for panels */
+  padding-left: 280px;
+  padding-right: 320px;
+  pointer-events: none;
+}
+
+.ve-editor-mode * {
+  pointer-events: auto;
+}
+
+.ve-editor-mode .ve-no-edit {
+  pointer-events: none;
+}
+
+/* Selection and hover outlines */
+[data-edit-id] {
+  position: relative;
+  cursor: pointer;
+  transition: outline 0.1s ease;
+}
+
+[data-edit-hovered="true"] {
+  outline: 2px dashed #3b82f6 !important;
+  outline-offset: 2px;
+}
+
+[data-edit-selected="true"] {
+  outline: 2px solid #2563eb !important;
+  outline-offset: 2px;
+}
+
+/* Editor panels */
+.ve-panel {
+  background: #1a1a2e;
+  color: #e0e0e0;
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
+}
+
+.ve-panel-header {
+  padding: 12px 16px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #8b8b9e;
+  border-bottom: 1px solid #2a2a3e;
+}
+
+.ve-tree-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px 6px 16px;
+  font-size: 13px;
+  cursor: pointer;
+  border: none;
+  background: none;
+  color: #c0c0d0;
+  width: 100%;
+  text-align: left;
+  transition: background 0.1s;
+}
+
+.ve-tree-item:hover {
+  background: #2a2a3e;
+}
+
+.ve-tree-item-selected {
+  background: #2563eb20;
+  color: #60a5fa;
+}
+
+.ve-tree-section {
+  padding: 8px 16px 4px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #6b6b80;
+}
+
+.ve-prop-group {
+  padding: 8px 16px 4px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #6b6b80;
+}
+
+.ve-prop-row {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 6px 16px;
+}
+
+.ve-prop-label {
+  font-size: 12px;
+  color: #a0a0b0;
+}
+
+.ve-prop-input {
+  background: #0d0d1a;
+  border: 1px solid #2a2a3e;
+  border-radius: 6px;
+  padding: 6px 8px;
+  color: #e0e0e0;
+  font-size: 13px;
+  font-family: inherit;
+  width: 100%;
+  box-sizing: border-box;
+  outline: none;
+}
+
+.ve-prop-input:focus {
+  border-color: #2563eb;
+}
+
+.ve-prop-textarea {
+  min-height: 60px;
+  resize: vertical;
+}
+
+.ve-prop-color-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.ve-prop-color-picker {
+  width: 36px;
+  height: 30px;
+  border: 1px solid #2a2a3e;
+  border-radius: 6px;
+  cursor: pointer;
+  background: none;
+  padding: 2px;
+}
+
+.ve-prop-select {
+  appearance: none;
+  background: #0d0d1a url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%238b8b9e' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E") no-repeat right 8px center;
+  padding-right: 28px;
+}
+
+.ve-toolbar-btn {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 6px 10px;
+  border: 1px solid #2a2a3e;
+  border-radius: 6px;
+  background: #1a1a2e;
+  color: #c0c0d0;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.1s;
+}
+
+.ve-toolbar-btn:hover:not(:disabled) {
+  background: #2a2a3e;
+  color: #fff;
+}
+
+.ve-toolbar-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.ve-toolbar-btn-primary {
+  background: #2563eb;
+  border-color: #2563eb;
+  color: #fff;
+  font-weight: 600;
+}
+
+.ve-toolbar-btn-primary:hover:not(:disabled) {
+  background: #1d4ed8;
+}
+
+.ve-asset-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: background 0.1s;
+}
+
+.ve-asset-item:hover {
+  background: #2a2a3e;
+}
+
+.ve-asset-thumb {
+  width: 40px;
+  height: 40px;
+  border-radius: 4px;
+  object-fit: cover;
+  border: 1px solid #2a2a3e;
+}
+
+.ve-asset-name {
+  font-size: 12px;
+  color: #c0c0d0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ve-badge-upload {
+  font-size: 9px;
+  padding: 1px 5px;
+  border-radius: 3px;
+  background: #f59e0b20;
+  color: #f59e0b;
+  font-weight: 700;
+}
+
+.ve-breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  padding: 0 16px 8px;
+  flex-wrap: wrap;
+}
+
+.ve-breadcrumb-item {
+  font-size: 11px;
+  color: #8b8b9e;
+  cursor: pointer;
+  border: none;
+  background: none;
+  padding: 2px 4px;
+  border-radius: 3px;
+}
+
+.ve-breadcrumb-item:hover {
+  background: #2a2a3e;
+  color: #c0c0d0;
+}
+
+.ve-breadcrumb-sep {
+  font-size: 10px;
+  color: #4a4a5e;
+}
+
+.ve-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.ve-modal {
+  background: #1a1a2e;
+  border: 1px solid #2a2a3e;
+  border-radius: 12px;
+  max-width: 800px;
+  width: 100%;
+  max-height: 85vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.ve-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  border-bottom: 1px solid #2a2a3e;
+}
+
+.ve-modal-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: #fff;
+}
+
+.ve-modal-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px 20px;
+}
+
+.ve-modal-footer {
+  display: flex;
+  gap: 8px;
+  padding: 12px 20px;
+  border-top: 1px solid #2a2a3e;
+  flex-wrap: wrap;
+}
+
+.ve-prompt-output {
+  background: #0d0d1a;
+  border: 1px solid #2a2a3e;
+  border-radius: 8px;
+  padding: 16px;
+  font-family: 'Monaco', 'Menlo', monospace;
+  font-size: 12px;
+  line-height: 1.6;
+  color: #c0c0d0;
+  white-space: pre-wrap;
+  word-break: break-word;
+  max-height: 500px;
+  overflow-y: auto;
+}
+
+.ve-toast {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #2563eb;
+  color: #fff;
+  padding: 8px 20px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  z-index: 10001;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  animation: ve-fade-in 0.2s ease;
+}
+
+@keyframes ve-fade-in {
+  from { opacity: 0; transform: translateX(-50%) translateY(8px); }
+  to { opacity: 1; transform: translateX(-50%) translateY(0); }
+}
+
+.ve-empty-state {
+  padding: 32px 16px;
+  text-align: center;
+  color: #6b6b80;
+  font-size: 13px;
+}
+
+/* Responsive: stack panels on small screens */
+@media (max-width: 1024px) {
+  .ve-editor-mode {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .ve-left-panel {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .ve-right-panel {
+    display: none;
+  }
+}
